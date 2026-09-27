@@ -35,8 +35,9 @@ export default function Hero() {
       />
       {/* TODO: replace the <Image> above with <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" src="/hero-character.mp4" /> once the AI video is generated */}
 
-      {/* Scrim so the overlaid text stays legible against any part of the image */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 via-40% to-black/60" />
+      {/* Scrim so the overlaid text stays legible against any part of the image — two layers, since the text now sits in the bottom corners: one darkens the sides, one darkens the bottom */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
       {/* Cursor-tracking glow */}
       <motion.div
@@ -45,12 +46,12 @@ export default function Hero() {
         style={{ left: springX, top: springY, x: "-50%", y: "-50%" }}
       />
 
-      <div className="relative z-10 w-full px-6 pb-20 text-center text-white">
+      <div className="relative z-10 flex w-full flex-col items-center gap-6 px-6 pb-16 text-center text-white sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:px-10 sm:pb-16 sm:text-left lg:px-16 lg:pb-20">
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-4xl font-bold sm:text-6xl"
+          className="max-w-xs text-3xl font-bold sm:text-4xl lg:max-w-sm lg:text-5xl"
         >
           Hi, I&apos;m Priyanshu.
         </motion.h1>
@@ -58,29 +59,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-          className="mx-auto mt-4 max-w-md text-lg text-white/80"
+          className="max-w-[15rem] text-base text-white/80 sm:text-right sm:text-lg lg:max-w-[17rem]"
         >
           Full-stack developer building AI-powered web apps &mdash; MERN, Next.js, and a lot of debugging.
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-          className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
-        >
-          <a
-            href="#projects"
-            className="rounded-full bg-red-600 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-red-700"
-          >
-            View my work
-          </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-white/10"
-          >
-            Get in touch
-          </a>
-        </motion.div>
       </div>
     </section>
   );
