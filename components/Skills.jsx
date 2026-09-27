@@ -1,9 +1,61 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const skills = [
+  "React",
+  "Next.js",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "Tailwind CSS",
+  "Framer Motion",
+  "JWT Auth",
+  "REST APIs",
+  "Git & GitHub",
+];
+
+const listVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0 },
+};
+
 export default function Skills() {
   return (
-    <section id="skills" className="min-h-screen flex items-center justify-center border-b border-foreground/10">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold">Skills</h2>
-        <p className="mt-2 text-foreground/60">Tech stack grid goes here (Day 3)</p>
+    <section id="skills" className="border-b border-foreground/10 px-6 py-24">
+      <div className="mx-auto max-w-4xl text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.4 }}
+          className="text-3xl font-bold"
+        >
+          Skills
+        </motion.h2>
+
+        <motion.ul
+          variants={listVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+        >
+          {skills.map((skill) => (
+            <motion.li
+              key={skill}
+              variants={itemVariants}
+              className="rounded-full border border-foreground/15 bg-foreground/5 px-4 py-2 text-sm font-medium"
+            >
+              {skill}
+            </motion.li>
+          ))}
+        </motion.ul>
       </div>
     </section>
   );
