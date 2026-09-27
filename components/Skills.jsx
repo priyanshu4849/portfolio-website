@@ -50,7 +50,10 @@ export default function Skills() {
             <motion.li
               key={skill}
               variants={itemVariants}
-              className="rounded-full border border-foreground/15 bg-foreground/5 px-4 py-2 text-sm font-medium"
+              whileHover={{ scale: 1.08, backgroundColor: "rgba(220, 38, 38, 0.12)" }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="cursor-default rounded-full border border-foreground/15 bg-foreground/5 px-4 py-2 text-sm font-medium"
             >
               {skill}
             </motion.li>

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -17,6 +17,15 @@ export default function Hero() {
     mouseY.set(e.clientY - rect.top);
   }
 
+  // Parallax: as the hero scrolls out of view (progress 0 -> 1 over exactly
+  // one screen-height of scrolling), the character slowly zooms in and fades.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
+
   return (
     <section
       id="hero"
@@ -25,14 +34,19 @@ export default function Hero() {
       className="relative flex h-screen w-full items-end justify-center overflow-hidden border-b border-foreground/10"
     >
       {/* Full-screen character — placeholder for the AI-generated video, same 16:9 frame it'll drop into */}
-      <Image
-        src="/hero-character.jpg"
-        alt="3D animated character illustration"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
+      <motion.div
+        className="absolute inset-0"
+        style={{ scale: imageScale, opacity: imageOpacity }}
+      >
+        <Image
+          src="/hero-character.jpg"
+          alt="3D animated character illustration"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      </motion.div>
       {/* TODO: replace the <Image> above with <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" src="/hero-character.mp4" /> once the AI video is generated */}
 
       {/* Scrim so the overlaid text stays legible against any part of the image — two layers, since the text now sits in the bottom corners: one darkens the sides, one darkens the bottom */}
