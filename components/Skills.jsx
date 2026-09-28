@@ -9,7 +9,7 @@ const skills = [
   "Express",
   "MongoDB",
   "Tailwind CSS",
-  "Framer Motion",
+  "Motion",
   "JWT Auth",
   "REST APIs",
   "Git & GitHub",
