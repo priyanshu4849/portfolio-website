@@ -26,6 +26,16 @@ export default function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
 
+  const headlineWords = "Hi, I'm Priyanshu.".split(" ");
+  const headlineContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  };
+  const wordVariant = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
     <section
       id="hero"
@@ -62,12 +72,16 @@ export default function Hero() {
 
       <div className="relative z-10 flex w-full flex-col items-center gap-6 px-6 pb-16 text-center text-white sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:px-10 sm:pb-16 sm:text-left lg:px-16 lg:pb-20">
         <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="max-w-xs text-3xl font-bold sm:text-4xl lg:max-w-sm lg:text-5xl"
+          variants={headlineContainer}
+          initial="hidden"
+          animate="show"
+          className="flex max-w-xs flex-wrap justify-center gap-x-2 text-3xl font-bold sm:justify-start sm:text-4xl lg:max-w-sm lg:text-5xl"
         >
-          Hi, I&apos;m Priyanshu.
+          {headlineWords.map((word, i) => (
+            <motion.span key={i} variants={wordVariant}>
+              {word}
+            </motion.span>
+          ))}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
