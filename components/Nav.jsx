@@ -13,6 +13,20 @@ const LINKS = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
 
+  // Closing the mobile menu collapses its height via AnimatePresence's exit
+  // animation — if the browser's native anchor-scroll fires at the same
+  // instant, it targets a layout that's still shifting, and the two end up
+  // fighting each other (the hash updates but the page never actually
+  // scrolls). Close the menu first, then scroll manually once the collapse
+  // animation has had time to finish.
+  function handleLinkClick(e, href) {
+    e.preventDefault();
+    setOpen(false);
+    window.setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav className="flex items-center justify-between bg-black/30 px-6 py-4 text-white backdrop-blur-md sm:px-10">
@@ -67,7 +81,7 @@ export default function Nav() {
               <li key={link.href} className="border-t border-white/10">
                 <a
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleLinkClick(e, link.href)}
                   className="block px-6 py-4 text-sm font-medium text-white/80 hover:text-white"
                 >
                   {link.label}
