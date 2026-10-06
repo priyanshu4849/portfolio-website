@@ -22,8 +22,8 @@ export default function About() {
         <div>
           <h2 className="text-3xl font-bold">About me</h2>
           <p className="mt-4 text-foreground/70">
-            I&apos;m a CS student at Galgotias University (Class of 2027), building full-stack apps with
-            the MERN stack. My first real project was an AI-powered resume builder that scores resumes
+            I&apos;m a CS student at Galgotias University (Class of 2027), building full stack apps with
+            the MERN stack. My first real project was an AI powered resume builder that scores resumes
             against job descriptions and rewrites weak bullet points using Claude. I&apos;m currently
             deepening my MERN fundamentals through Harkirat Singh&apos;s 100xDevs cohort, with Next.js,
             TypeScript, and WebSockets coming up next.
@@ -31,7 +31,7 @@ export default function About() {
           <p className="mt-4 text-foreground/70">
             Outside of coursework, I&apos;m the Management Lead for GDG on Campus at Galgotias University,
             running technical events, hackathons, and workshops end to end &mdash; and I placed 2nd
-            runner-up at the GDG Noida DevFest Buildathon 2025 with SentraSec AI.
+            runner up at the GDG Noida DevFest Buildathon 2025 with SentraSec AI.
           </p>
         </div>
       </motion.div>
