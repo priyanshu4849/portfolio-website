@@ -41,7 +41,7 @@ export default function Contact() {
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/10"
+              className="w-full max-w-xs rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/10 sm:w-auto sm:max-w-none"
             >
               {link.label}
             </a>

@@ -41,7 +41,7 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative flex h-screen w-full items-end justify-center overflow-hidden border-b border-foreground/10"
+      className="relative flex h-svh w-full items-end justify-center overflow-hidden border-b border-foreground/10"
     >
       {/* Full-screen character — placeholder for the AI-generated video, same 16:9 frame it'll drop into */}
       <motion.div
@@ -63,10 +63,11 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-      {/* Cursor-tracking glow */}
+      {/* Cursor-tracking glow — only on devices with a real hover pointer; touchscreens never fire
+          mousemove, so on a phone it would just sit stuck in the top-left corner */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute h-96 w-96 rounded-full bg-gradient-to-br from-red-500/25 via-orange-400/20 to-transparent blur-3xl"
+        className="pointer-events-none absolute hidden h-96 w-96 rounded-full bg-gradient-to-br from-red-500/25 via-orange-400/20 to-transparent blur-3xl [@media(hover:hover)]:block"
         style={{ left: springX, top: springY, x: "-50%", y: "-50%" }}
       />
 
