@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 const links = [
   { label: "priyanshusaini4849@gmail.com", href: "mailto:priyanshusaini4849@gmail.com" },
   { label: "GitHub — @priyanshu4849", href: "https://github.com/priyanshu4849" },
+  { label: "LinkedIn — Priyanshu Saini", href: "https://www.linkedin.com/in/priyanshu-saini-90ab17270" },
 ];
 
 const container = {
