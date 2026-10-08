@@ -29,8 +29,8 @@ export default function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="flex items-center justify-between bg-black/30 px-6 py-4 text-white backdrop-blur-md sm:px-10">
-        <a href="#hero" className="font-bold" onClick={() => setOpen(false)}>
+      <nav className="flex items-center justify-between bg-background/60 px-6 py-4 text-white backdrop-blur-md sm:px-10">
+        <a href="#hero" className="font-display font-bold tracking-tight" onClick={() => setOpen(false)}>
           Priyanshu
         </a>
 
@@ -75,7 +75,7 @@ export default function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden bg-black/70 text-white backdrop-blur-md sm:hidden"
+            className="overflow-hidden bg-background/90 text-white backdrop-blur-md sm:hidden"
           >
             {LINKS.map((link) => (
               <li key={link.href} className="border-t border-white/10">

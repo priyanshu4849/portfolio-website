@@ -10,7 +10,7 @@ export default function ScrollProgress() {
   return (
     <motion.div
       aria-hidden="true"
-      className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-red-600"
+      className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-accent"
       style={{ scaleX: scrollYProgress }}
     />
   );

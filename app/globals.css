@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
+/* One fixed palette, sampled from the hero image: the page background is the
+   same charcoal as the character's backdrop, so the image blends into the page
+   instead of sitting in a box, and the accent is the character's peach skin tone. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #2a2a2a;
+  --foreground: #f2f2f0;
+  --accent: #e8b28f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-space-grotesk);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
 }
 
 html {

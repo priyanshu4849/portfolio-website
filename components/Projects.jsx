@@ -44,7 +44,7 @@ export default function Projects() {
         viewport={{ once: true, amount: 0.2 }}
         className="mx-auto mt-10 flex max-w-4xl flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5 lg:flex-row"
       >
-        <motion.div variants={itemVariants} className="relative aspect-video w-full bg-black lg:aspect-auto lg:w-1/2">
+        <motion.div variants={itemVariants} className="relative aspect-video w-full bg-black/25 lg:aspect-auto lg:w-1/2">
           <Image
             src="/project-ats-resume.png"
             alt="ATS Resume Builder landing page preview"
@@ -80,7 +80,7 @@ export default function Projects() {
               href="https://ats-resume-builder-ten-xi.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-red-700"
+              className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
             >
               Live site
             </a>

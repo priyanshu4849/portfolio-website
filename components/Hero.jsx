@@ -41,7 +41,7 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative flex h-svh w-full items-end justify-center overflow-hidden border-b border-foreground/10"
+      className="relative flex h-svh w-full items-end justify-center overflow-hidden"
     >
       {/* Full-screen character — placeholder for the AI-generated video, same 16:9 frame it'll drop into */}
       <motion.div
@@ -59,15 +59,15 @@ export default function Hero() {
       </motion.div>
       {/* TODO: replace the <Image> above with <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" src="/hero-character.mp4" /> once the AI video is generated */}
 
-      {/* Scrim so the overlaid text stays legible against any part of the image — two layers, since the text now sits in the bottom corners: one darkens the sides, one darkens the bottom */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      {/* Scrim so the overlaid text stays legible against any part of the image — two layers, since the text now sits in the bottom corners: one darkens the sides, one darkens the bottom. Both fade into the page background colour rather than black, so the hero melts into the About section with no hard edge */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
 
       {/* Cursor-tracking glow — only on devices with a real hover pointer; touchscreens never fire
           mousemove, so on a phone it would just sit stuck in the top-left corner */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute hidden h-96 w-96 rounded-full bg-gradient-to-br from-red-500/25 via-orange-400/20 to-transparent blur-3xl [@media(hover:hover)]:block"
+        className="pointer-events-none absolute hidden h-96 w-96 rounded-full bg-gradient-to-br from-accent/25 via-accent/10 to-transparent blur-3xl [@media(hover:hover)]:block"
         style={{ left: springX, top: springY, x: "-50%", y: "-50%" }}
       />
 
@@ -79,7 +79,11 @@ export default function Hero() {
           className="flex max-w-xs flex-wrap justify-center gap-x-2 text-3xl font-bold sm:justify-start sm:text-4xl lg:max-w-sm lg:text-5xl"
         >
           {headlineWords.map((word, i) => (
-            <motion.span key={i} variants={wordVariant}>
+            <motion.span
+              key={i}
+              variants={wordVariant}
+              className={i === headlineWords.length - 1 ? "text-accent" : undefined}
+            >
               {word}
             </motion.span>
           ))}

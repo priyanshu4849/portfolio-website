@@ -15,7 +15,7 @@ export default function About() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center sm:flex-row sm:items-start sm:text-left"
       >
-        <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-amber-400 text-3xl font-bold text-white">
+        <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-[#a8674a] font-display text-3xl font-bold text-background">
           PS
         </div>
 
