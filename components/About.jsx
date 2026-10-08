@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 export default function About() {
@@ -15,8 +16,14 @@ export default function About() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center sm:flex-row sm:items-start sm:text-left"
       >
-        <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-[#a8674a] font-display text-3xl font-bold text-background">
-          PS
+        <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-2 ring-accent ring-offset-4 ring-offset-background">
+          <Image
+            src="/profile.jpg"
+            alt="Priyanshu Saini at GDG Noida DevFest 2025"
+            fill
+            sizes="128px"
+            className="object-cover"
+          />
         </div>
 
         <div>
