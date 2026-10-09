@@ -54,9 +54,11 @@ export default function Contact() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="mt-16 text-xs text-foreground/40"
+        className="mt-16 text-xs leading-relaxed text-foreground/40"
       >
         Built with Next.js, Tailwind CSS, and Motion.
+        <br />
+        The 3D me in the hero was generated and animated with Google Flow.
       </motion.p>
     </section>
   );
