@@ -18,12 +18,13 @@ export default function Hero() {
   }
 
   // Parallax: as the hero scrolls out of view (progress 0 -> 1 over exactly
-  // one screen-height of scrolling), the character slowly zooms in and fades.
+  // one screen-height of scrolling), the character slowly zooms in and fades. The zoom
+  // is kept small because the video is 720p and upscaling further looks soft.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
 
   const headlineWords = "Hi, I'm Priyanshu.".split(" ");
@@ -43,21 +44,33 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="relative flex h-svh w-full items-end justify-center overflow-hidden"
     >
-      {/* Full-screen character — placeholder for the AI-generated video, same 16:9 frame it'll drop into */}
+      {/* Full-screen 3D version of me — an AI-animated 10s loop. The poster is the
+          video's own first frame, so the swap from still to video is invisible.
+          Visitors who've turned on "reduce motion" in their OS get only the still. */}
       <motion.div
         className="absolute inset-0"
         style={{ scale: imageScale, opacity: imageOpacity }}
       >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-poster.jpg"
+          aria-hidden="true"
+          className="h-full w-full object-cover motion-reduce:hidden"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
         <Image
-          src="/hero-character.jpg"
-          alt="3D animated character illustration"
+          src="/hero-poster.jpg"
+          alt="3D animated portrait of Priyanshu"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="hidden object-cover motion-reduce:block"
         />
       </motion.div>
-      {/* TODO: replace the <Image> above with <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" src="/hero-character.mp4" /> once the AI video is generated */}
 
       {/* Scrim so the overlaid text stays legible against any part of the image — two layers, since the text now sits in the bottom corners: one darkens the sides, one darkens the bottom. Both fade into the page background colour rather than black, so the hero melts into the About section with no hard edge */}
       <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />

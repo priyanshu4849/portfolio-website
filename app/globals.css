@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
-/* One fixed palette, sampled from the hero image: the page background is the
-   same charcoal as the character's backdrop, so the image blends into the page
-   instead of sitting in a box, and the accent is the character's peach skin tone. */
+/* One fixed palette, sampled from the hero video: the page background matches
+   the charcoal at the edges of the video's vignette, so the video blends into
+   the page instead of sitting in a box, and the accent echoes the character's
+   warm skin tone. */
 :root {
-  --background: #2a2a2a;
+  --background: #1f2023;
   --foreground: #f2f2f0;
   --accent: #e8b28f;
 }
