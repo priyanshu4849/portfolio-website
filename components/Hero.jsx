@@ -101,14 +101,33 @@ export default function Hero() {
             </motion.span>
           ))}
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-          className="max-w-[15rem] text-base text-white/80 sm:text-right sm:text-lg lg:max-w-[17rem]"
+          className="flex flex-col items-center gap-5 sm:items-end"
         >
-          Full-stack developer building AI-powered web apps &mdash; MERN, Next.js, and a lot of debugging.
-        </motion.p>
+          <p className="max-w-[15rem] text-base text-white/80 sm:text-right sm:text-lg lg:max-w-[17rem]">
+            Full-stack developer building AI-powered web apps &mdash; MERN, Next.js, and a lot of debugging.
+          </p>
+          {/* Two clear next steps for a visitor: see the work, or grab the resume.
+              `download` makes the browser save the PDF instead of navigating to it. */}
+          <div className="flex gap-3">
+            <a
+              href="#projects"
+              className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+            >
+              See my work
+            </a>
+            <a
+              href="/Priyanshu_Saini_Resume.pdf"
+              download
+              className="rounded-full border border-white/30 bg-white/5 px-5 py-2.5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white/15"
+            >
+              Resume ↓
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

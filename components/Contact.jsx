@@ -47,6 +47,16 @@ export default function Contact() {
             </a>
           ))}
         </motion.div>
+
+        <motion.div variants={item} className="mt-6">
+          <a
+            href="/Priyanshu_Saini_Resume.pdf"
+            download
+            className="inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-85"
+          >
+            Download my resume (PDF)
+          </a>
+        </motion.div>
       </motion.div>
 
       <motion.p
