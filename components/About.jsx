@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 const rightNow = [
   { label: "Studying", value: "CS at Galgotias University, Class of 2027" },
@@ -19,17 +20,18 @@ export default function About() {
   return (
     <section id="about" className="border-b border-foreground/10 px-6 py-24">
       {/* Editorial split: a big statement + photo on the left, the details on
-          the right — a different shape from the centred sections around it */}
+          the right */}
       <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-12 lg:gap-16">
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="lg:col-span-5"
         >
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">About me</p>
-          <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
-            I build AI-powered web apps &mdash; and the communities around them.
-          </h2>
+          <SectionHeading
+            index="01"
+            label="About"
+            title="I build AI-powered web apps — and the communities around them."
+          />
           <div className="relative mt-8 aspect-square w-40 overflow-hidden rounded-3xl ring-1 ring-foreground/10 sm:w-48">
             <Image
               src="/profile.jpg"

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 // Grouped by what each set of tools does, with where I've actually used it —
 // more useful to a reader than a flat list of logos.
@@ -41,18 +42,12 @@ export default function Skills() {
   return (
     <section id="skills" className="border-b border-foreground/10 px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        {/* Left-aligned header with a subtitle on the right, instead of the
-            centred heading used elsewhere */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
-        >
-          <h2 className="text-3xl font-bold">Skills</h2>
-          <p className="text-sm text-foreground/60">What I reach for, and where I&apos;ve used it.</p>
-        </motion.div>
+        <SectionHeading
+          index="02"
+          label="Skills"
+          title="What I reach for."
+          subtitle="Grouped by what they do, with where I've actually used them."
+        />
 
         <motion.ul
           variants={gridVariants}

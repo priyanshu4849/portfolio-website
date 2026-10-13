@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 const links = [
   { label: "priyanshusaini4849@gmail.com", href: "mailto:priyanshusaini4849@gmail.com" },
@@ -20,56 +21,56 @@ const item = {
 
 export default function Contact() {
   return (
-    <section id="contact" className="flex min-h-[70vh] flex-col items-center justify-center px-6 py-24 text-center">
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.6 }}
-      >
-        <motion.h2 variants={item} className="text-3xl font-bold sm:text-4xl">
-          Let&apos;s build something.
-        </motion.h2>
-        <motion.p variants={item} className="mx-auto mt-4 max-w-sm text-foreground/70">
-          Open to internships and interesting problems. Reach out, or just say hi.
-        </motion.p>
+    <section id="contact" className="px-6 pt-24 pb-12">
+      <div className="mx-auto max-w-5xl">
+        <SectionHeading
+          index="05"
+          label="Contact"
+          title="Let's build something."
+          subtitle="Open to internships and interesting problems. Reach out, or just say hi."
+        />
 
-        <motion.div variants={item} className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+          className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+        >
+          {/* The resume leads, since it's the one thing most recruiters want */}
+          <motion.a
+            variants={item}
+            href="/Priyanshu_Saini_Resume.pdf"
+            download
+            className="rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-85"
+          >
+            Download my resume (PDF)
+          </motion.a>
           {links.map((link) => (
-            <a
+            <motion.a
               key={link.href}
+              variants={item}
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="w-full max-w-xs rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/10 sm:w-auto sm:max-w-none"
+              className="rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-center text-sm font-medium transition-colors hover:bg-foreground/10"
             >
               {link.label}
-            </a>
+            </motion.a>
           ))}
         </motion.div>
 
-        <motion.div variants={item} className="mt-6">
-          <a
-            href="/Priyanshu_Saini_Resume.pdf"
-            download
-            className="inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-85"
-          >
-            Download my resume (PDF)
-          </a>
-        </motion.div>
-      </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="mt-16 text-xs leading-relaxed text-foreground/40"
-      >
-        Built with Next.js, Tailwind CSS, and Motion.
-        <br />
-        The 3D me in the hero was generated and animated with Google Flow.
-      </motion.p>
+        <motion.footer
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="mt-24 flex flex-col gap-2 border-t border-foreground/10 pt-6 text-xs leading-relaxed text-foreground/40 sm:flex-row sm:justify-between"
+        >
+          <p>Built with Next.js, Tailwind CSS, and Motion.</p>
+          <p>The 3D me in the hero was generated and animated with Google Flow.</p>
+        </motion.footer>
+      </div>
     </section>
   );
 }

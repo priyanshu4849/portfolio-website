@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 // Each card is rendered from this list — adding a project means adding an
 // object here, not copying JSX. Optional fields (`award`, `role`) only render
@@ -44,17 +45,16 @@ const itemVariants = {
 export default function Projects() {
   return (
     <section id="projects" className="border-b border-foreground/10 px-6 py-24">
-      <motion.h2
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 0.4 }}
-        className="text-center text-3xl font-bold"
-      >
-        Projects
-      </motion.h2>
+      <div className="mx-auto max-w-5xl">
+        <SectionHeading
+          index="03"
+          label="Projects"
+          title="Things I've built and shipped."
+          subtitle="Both are live — click through and try them."
+        />
+      </div>
 
-      <div className="mx-auto mt-10 flex max-w-4xl flex-col gap-10">
+      <div className="mx-auto mt-10 flex max-w-5xl flex-col gap-10">
         {projects.map((project, i) => (
           <motion.article
             key={project.title}

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 const stats = [
   { value: "~300", label: "participants at TechSprint, a 36-hour offline hackathon" },
@@ -28,19 +29,15 @@ const itemVariants = {
 export default function Community() {
   return (
     <section id="community" className="border-b border-foreground/10 px-6 py-24">
-      <div className="mx-auto max-w-4xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.4 }}
-          className="text-center text-3xl font-bold"
-        >
-          Community
-        </motion.h2>
+      <div className="mx-auto max-w-5xl">
+        <SectionHeading
+          index="04"
+          label="Community"
+          title="Running hackathons and workshops on campus."
+          subtitle="What I do outside of code — organising, coordinating, leading."
+        />
 
-        {/* Role header — left-aligned with an accent rule, unlike the centred
-            sections around it, so it reads like an entry on a timeline */}
+        {/* Role header with an accent rule, so it reads like an entry on a timeline */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
