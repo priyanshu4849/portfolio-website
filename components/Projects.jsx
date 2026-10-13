@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
 
 // Each card is rendered from this list — adding a project means adding an
-// object here, not copying JSX. Optional fields (`award`, `role`) only render
+// object here, not copying JSX. Optional fields (`award`, `role`, `hardestBug`) only render
 // when present.
 const projects = [
   {
@@ -14,6 +14,8 @@ const projects = [
       "An AI-powered MERN app that scores resumes against real job descriptions, rewrites weak bullet points with Claude, and exports a clean, ATS-safe PDF. My first full-stack project — built, hardened, and shipped end to end.",
     image: "/project-ats-resume.png",
     imageAlt: "ATS Resume Builder landing page preview",
+    hardestBug:
+      "PDF export worked locally but failed on Render — Puppeteer couldn't find Chrome, because Render's build cache skipped the browser download. Fixed by pointing Puppeteer at a project-local cache and forcing the download in a postinstall script.",
     techStack: ["React", "Node.js", "Express", "MongoDB", "Claude API", "JWT Auth", "Tailwind CSS", "Motion"],
     liveUrl: "https://ats-resume-builder-ten-xi.vercel.app",
     githubUrl: "https://github.com/priyanshu4849/ats-resume-builder",
@@ -89,6 +91,15 @@ export default function Projects() {
                 <p className="mt-2 text-sm text-foreground/70">{project.description}</p>
                 {project.role && <p className="mt-3 text-sm text-foreground/50">{project.role}</p>}
               </div>
+
+              {/* One real problem and how it got solved — says more about how I
+                  work than a feature list does */}
+              {project.hardestBug && (
+                <div className="rounded-2xl border-l-2 border-accent bg-background/50 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-widest text-accent">Hardest bug</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-foreground/70">{project.hardestBug}</p>
+                </div>
+              )}
 
               <ul className="flex flex-wrap gap-2">
                 {project.techStack.map((tech) => (
