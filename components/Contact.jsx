@@ -26,8 +26,8 @@ export default function Contact() {
         <SectionHeading
           index="05"
           label="Contact"
-          title="Let's build something."
-          subtitle="Open to internships and interesting problems. Reach out, or just say hi."
+          title="Looking for an internship."
+          subtitle="I'm a CS student (Class of 2027) who builds full stack apps and actually ships them. If you're hiring interns, I'd love to talk."
         />
 
         <motion.div
