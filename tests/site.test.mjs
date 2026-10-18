@@ -12,6 +12,7 @@
 import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
+import { inflateSync } from "node:zlib";
 
 const BASE_URL = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
 
@@ -143,6 +144,24 @@ describe("assets", () => {
     assert.match(res.headers.get("content-type"), /application\/pdf/);
     const start = Buffer.from(await res.arrayBuffer()).subarray(0, 5).toString();
     assert.equal(start, "%PDF-");
+  });
+
+  test("resume has clickable LinkedIn, GitHub and portfolio links", async () => {
+    // PDF links live in compressed streams, so inflate each one and look for them
+    const pdf = Buffer.from(await (await fetch(BASE_URL + "/Priyanshu_Saini_Resume.pdf")).arrayBuffer());
+    let content = pdf.toString("latin1");
+    for (const match of pdf.toString("latin1").matchAll(/stream\r?\n/g)) {
+      const begin = match.index + match[0].length;
+      const end = pdf.indexOf("endstream", begin);
+      try {
+        content += inflateSync(pdf.subarray(begin, end)).toString("latin1");
+      } catch {
+        // not a compressed stream (images, fonts in other formats); skip it
+      }
+    }
+    for (const url of ["linkedin.com/in/", "github.com/priyanshu4849", "vercel.app"]) {
+      assert.match(content, new RegExp(`/URI\\s*\\(https://[^)]*${url.replace(/\./g, "\\.")}`), `no clickable ${url} link`);
+    }
   });
 
   test("hero video and its poster load", async () => {
