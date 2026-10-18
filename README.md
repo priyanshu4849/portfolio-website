@@ -68,6 +68,18 @@ npm run dev
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+## Tests
+
+`tests/site.test.mjs` checks the built site: security headers, private files returning 404, safe external links, alt text, the resume and video loading, no secrets in the shipped JavaScript, and no GPS location in the photos. It uses Node's built in test runner, so there's nothing extra to install.
+
+```bash
+npm run build && npm start   # terminal 1
+npm test                     # terminal 2
+
+# or test the live site
+BASE_URL=https://portfolio-website-ats-resume.vercel.app npm test
+```
+
 ## Contact
 
 - Email: [priyanshusaini4849@gmail.com](mailto:priyanshusaini4849@gmail.com)
