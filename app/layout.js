@@ -1,4 +1,5 @@
 import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -54,6 +55,9 @@ export default function RootLayout({ children }) {
         <ScrollProgress />
         <Nav />
         {children}
+        {/* Counts page views on the deployed site (Vercel dashboard → Analytics).
+            Does nothing in local dev, so testing here never inflates the numbers. */}
+        <Analytics />
       </body>
     </html>
   );
