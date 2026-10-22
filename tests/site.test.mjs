@@ -238,3 +238,15 @@ describe("privacy of public files", () => {
     });
   }
 });
+
+describe("old addresses", () => {
+  // The old *.vercel.app names only exist on Vercel, so this only runs against the live site
+  const live = BASE_URL === "https://priyanshu4849.me";
+  for (const host of ["portfolio-website-ats-resume.vercel.app", "portfolio-website-six-iota-29.vercel.app"]) {
+    test(`${host} redirects to priyanshu4849.me`, { skip: !live && "only checked against the live site" }, async () => {
+      const res = await fetch(`https://${host}/Priyanshu_Saini_Resume.pdf`, { redirect: "manual" });
+      assert.equal(res.status, 308);
+      assert.equal(res.headers.get("location"), "https://priyanshu4849.me/Priyanshu_Saini_Resume.pdf");
+    });
+  }
+});

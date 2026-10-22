@@ -33,12 +33,25 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
+// The site's old Vercel addresses. Links shared before the custom domain still
+// point here, so send them (and search engines) to the same page on the new one.
+// Preview deployments use other *.vercel.app names, so they keep working.
+const oldHosts = ["portfolio-website-ats-resume.vercel.app", "portfolio-website-six-iota-29.vercel.app"];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Drops the "X-Powered-By: Next.js" header, which only helps attackers fingerprint the stack
   poweredByHeader: false,
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
+  },
+  async redirects() {
+    return oldHosts.map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host", value: host }],
+      destination: "https://priyanshu4849.me/:path*",
+      permanent: true, // 308: browsers and Google treat the new URL as the real one
+    }));
   },
 };
 
