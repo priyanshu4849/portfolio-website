@@ -5,7 +5,7 @@
 //   npm run build && npm start      (in one terminal)
 //   npm test                        (in another)
 // Or against the live site:
-//   BASE_URL=https://portfolio-website-ats-resume.vercel.app npm test
+//   BASE_URL=https://priyanshu4849.me npm test
 //
 // Uses only Node's built-in test runner and fetch, so there's nothing to install.
 
@@ -159,7 +159,7 @@ describe("assets", () => {
         // not a compressed stream (images, fonts in other formats); skip it
       }
     }
-    for (const url of ["linkedin.com/in/", "github.com/priyanshu4849", "vercel.app"]) {
+    for (const url of ["linkedin.com/in/", "github.com/priyanshu4849", "priyanshu4849.me"]) {
       assert.match(content, new RegExp(`/URI\\s*\\(https://[^)]*${url.replace(/\./g, "\\.")}`), `no clickable ${url} link`);
     }
   });

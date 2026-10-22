@@ -2,9 +2,9 @@
 
 My personal portfolio site. It has a full screen, AI animated 3D version of me in the hero, plus the projects I've built and the community work I do on campus.
 
-**Live:** [portfolio-website-ats-resume.vercel.app](https://portfolio-website-ats-resume.vercel.app)
+**Live:** [priyanshu4849.me](https://priyanshu4849.me)
 
-![Portfolio preview](https://portfolio-website-ats-resume.vercel.app/opengraph-image)
+![Portfolio preview](https://priyanshu4849.me/opengraph-image)
 
 ## Highlights
 
@@ -77,7 +77,7 @@ npm run build && npm start   # terminal 1
 npm test                     # terminal 2
 
 # or test the live site
-BASE_URL=https://portfolio-website-ats-resume.vercel.app npm test
+BASE_URL=https://priyanshu4849.me npm test
 ```
 
 ## Contact

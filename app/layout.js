@@ -23,7 +23,7 @@ const description =
 // absolute ones — link-preview crawlers can't follow a bare "/opengraph-image".
 // The image itself comes from app/opengraph-image.js, so it isn't listed here.
 export const metadata = {
-  metadataBase: new URL("https://portfolio-website-ats-resume.vercel.app"),
+  metadataBase: new URL("https://priyanshu4849.me"),
   title: "Priyanshu Saini — Portfolio",
   description,
   openGraph: {
