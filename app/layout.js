@@ -17,20 +17,20 @@ const dmSans = DM_Sans({
 });
 
 const description =
-  "CS student and full-stack developer building AI-powered web apps with MERN and Next.js. Management Lead at GDG on Campus, Galgotias University.";
+  "CS student at Galgotias University who builds full stack web apps with MERN and Next.js. Management Lead at GDG on Campus.";
 
 // metadataBase turns relative URLs (like the generated opengraph-image) into
 // absolute ones — link-preview crawlers can't follow a bare "/opengraph-image".
 // The image itself comes from app/opengraph-image.js, so it isn't listed here.
 export const metadata = {
   metadataBase: new URL("https://priyanshu4849.me"),
-  title: "Priyanshu Saini — Portfolio",
+  title: "Priyanshu Saini",
   description,
   // Tells Google which address is the real one, so www and the old vercel.app
   // names (which redirect here anyway) never count as duplicate copies.
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Priyanshu Saini — Full-stack developer",
+    title: "Priyanshu Saini, full stack developer",
     description,
     url: "/",
     siteName: "Priyanshu Saini",
@@ -38,7 +38,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Priyanshu Saini — Full-stack developer",
+    title: "Priyanshu Saini, full stack developer",
     description,
   },
 };

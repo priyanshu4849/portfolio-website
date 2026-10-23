@@ -4,16 +4,16 @@ import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
 
 const stats = [
-  { value: "~300", label: "participants at TechSprint, a 36-hour offline hackathon" },
-  { value: "12", label: "events run — hackathons, workshops, and study jams" },
-  { value: "26", label: "volunteers coordinated across the core team" },
-  { value: "100", label: "students earned Google swag through the Solution Challenge" },
+  { value: "~300", label: "people at TechSprint, our 36 hour offline hackathon" },
+  { value: "12", label: "events so far, including hackathons, workshops and study jams" },
+  { value: "26", label: "volunteers I coordinate" },
+  { value: "100", label: "students who earned Google swag through the Solution Challenge" },
 ];
 
 const responsibilities = [
-  "Owned event operations end to end: venues, logistics, scheduling, and travel allowances.",
-  "Coordinated with speakers before and during every session.",
-  "Assigned and tracked work for the 26-member volunteer team, making sure tasks were done properly and on time.",
+  "I handle event operations: venues, logistics, schedules and travel allowances.",
+  "I stay in touch with speakers before and during every session.",
+  "I give tasks to our 26 volunteers and follow up until they're done.",
 ];
 
 const listVariants = {
@@ -33,8 +33,8 @@ export default function Community() {
         <SectionHeading
           index="04"
           label="Community"
-          title="Running hackathons and workshops on campus."
-          subtitle="What I do outside of code — organising, coordinating, leading."
+          title="Hackathons and workshops on campus."
+          subtitle="What I do when I'm not coding."
         />
 
         {/* Role header with an accent rule, so it reads like an entry on a timeline */}
@@ -45,7 +45,7 @@ export default function Community() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mt-10 border-l-2 border-accent pl-5"
         >
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">Sep 2025 — Present</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">Since Sep 2025</p>
           <h3 className="mt-2 text-xl font-bold sm:text-2xl">Management Lead · GDG on Campus</h3>
           <p className="mt-1 text-sm text-foreground/60">
             Galgotias University · one of 8 core team members

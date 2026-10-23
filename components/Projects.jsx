@@ -11,21 +11,21 @@ const projects = [
   {
     title: "ATS Resume Builder",
     description:
-      "An AI-powered MERN app that scores resumes against real job descriptions, rewrites weak bullet points with Claude, and exports a clean, ATS-safe PDF. My first full-stack project — built, hardened, and shipped end to end.",
+      "A MERN app that compares your resume with a job description, scores it, and uses Claude to rewrite weak bullet points. You can export the result as a PDF that ATS software can read. It was my first full stack project, and I took it from the first commit to a live site.",
     image: "/project-ats-resume.png",
     imageAlt: "ATS Resume Builder landing page preview",
     hardestBug:
-      "PDF export worked locally but failed on Render — Puppeteer couldn't find Chrome, because Render's build cache skipped the browser download. Fixed by pointing Puppeteer at a project-local cache and forcing the download in a postinstall script.",
+      "PDF export worked on my laptop but broke on Render. Puppeteer couldn't find Chrome, because Render's build cache was skipping the browser download. I fixed it by giving Puppeteer its own cache folder inside the project and forcing the download in a postinstall script.",
     techStack: ["React", "Node.js", "Express", "MongoDB", "Claude API", "JWT Auth", "Tailwind CSS", "Motion"],
     liveUrl: "https://ats-resume-builder-ten-xi.vercel.app",
     githubUrl: "https://github.com/priyanshu4849/ats-resume-builder",
   },
   {
     title: "SentraSec AI",
-    award: "2nd Runner-Up · GDG Noida DevFest Buildathon 2025",
+    award: "2nd Runner Up · GDG Noida DevFest Buildathon 2025",
     description:
-      "An AI-powered cybersecurity platform that puts four Gemini-backed tools in one dashboard: a phishing detector, a code vulnerability scanner, a cloud config risk analyzer, and a risk classifier.",
-    role: "Team project · My role: product & pitch — shaping the feature set, testing the flows, and presenting it to the judges.",
+      "A cybersecurity dashboard with four tools built on Gemini: a phishing detector, a code vulnerability scanner, a cloud config risk analyzer and a risk classifier.",
+    role: "Team project. I handled product and the pitch: deciding which features went in, testing the flows, and presenting to the judges.",
     image: "/project-sentrasec.jpg",
     imageAlt: "SentraSec AI landing page preview",
     techStack: ["Next.js", "TypeScript", "FastAPI", "Python", "Gemini API", "Firebase", "Tailwind CSS"],
@@ -51,8 +51,8 @@ export default function Projects() {
         <SectionHeading
           index="03"
           label="Projects"
-          title="Things I've built and shipped."
-          subtitle="Both are live — click through and try them."
+          title="Two things I've built."
+          subtitle="Both are live, so you can try them yourself."
         />
       </div>
 

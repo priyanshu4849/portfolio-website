@@ -5,7 +5,7 @@ import { join } from "node:path";
 // The picture shown when the site's link is shared on LinkedIn, WhatsApp, X,
 // Slack, etc. Next.js turns this file into a 1200×630 PNG at build time and
 // adds the og:image / twitter:image tags to <head> automatically.
-export const alt = "Priyanshu Saini — Full-stack developer building AI-powered web apps";
+export const alt = "Priyanshu Saini, CS student who builds full stack web apps";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -78,7 +78,7 @@ export default async function Image() {
               color: "rgba(242,242,240,0.75)",
             }}
           >
-            Full-stack developer building AI-powered web apps.
+            CS student who builds full stack web apps.
           </div>
           <div style={{ marginTop: 36, fontFamily: "DM Sans", fontSize: 20, color: "rgba(242,242,240,0.5)" }}>
             MERN · Next.js · Claude API · GDG on Campus

@@ -5,8 +5,8 @@ import SectionHeading from "./SectionHeading";
 
 const links = [
   { label: "priyanshusaini4849@gmail.com", href: "mailto:priyanshusaini4849@gmail.com" },
-  { label: "GitHub — @priyanshu4849", href: "https://github.com/priyanshu4849" },
-  { label: "LinkedIn — Priyanshu Saini", href: "https://www.linkedin.com/in/priyanshu-saini-90ab17270" },
+  { label: "GitHub: @priyanshu4849", href: "https://github.com/priyanshu4849" },
+  { label: "LinkedIn: Priyanshu Saini", href: "https://www.linkedin.com/in/priyanshu-saini-90ab17270" },
 ];
 
 const container = {
@@ -27,7 +27,7 @@ export default function Contact() {
           index="05"
           label="Contact"
           title="Looking for an internship."
-          subtitle="I'm a CS student (Class of 2027) who builds full stack apps and actually ships them. If you're hiring interns, I'd love to talk."
+          subtitle="I graduate in 2027. If you're hiring interns, email me or message me on LinkedIn."
         />
 
         <motion.div
@@ -67,8 +67,8 @@ export default function Contact() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="mt-24 flex flex-col gap-2 border-t border-foreground/10 pt-6 text-xs leading-relaxed text-foreground/40 sm:flex-row sm:justify-between"
         >
-          <p>Built with Next.js, Tailwind CSS, and Motion.</p>
-          <p>The 3D me in the hero was generated and animated with Google Flow.</p>
+          <p>Built with Next.js, Tailwind CSS and Motion.</p>
+          <p>The 3D version of me at the top was made with Google Flow.</p>
         </motion.footer>
       </div>
     </section>

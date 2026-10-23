@@ -6,8 +6,8 @@ import SectionHeading from "./SectionHeading";
 
 const rightNow = [
   { label: "Studying", value: "CS at Galgotias University, Class of 2027" },
-  { label: "Learning", value: "100xDevs cohort → Next.js, TypeScript, WebSockets" },
-  { label: "Leading", value: "GDG on Campus, as Management Lead" },
+  { label: "Learning", value: "100xDevs cohort, with Next.js, TypeScript and WebSockets next" },
+  { label: "Leading", value: "Management Lead at GDG on Campus" },
 ];
 
 const fadeUp = {
@@ -30,7 +30,7 @@ export default function About() {
           <SectionHeading
             index="01"
             label="About"
-            title="I build AI-powered web apps — and the communities around them."
+            title="I build web apps and help run the Google developer club at my college."
           />
           <div className="relative mt-8 aspect-square w-40 overflow-hidden rounded-3xl ring-1 ring-foreground/10 sm:w-48">
             <Image
@@ -49,16 +49,16 @@ export default function About() {
           className="lg:col-span-7 lg:pt-9"
         >
           <p className="text-foreground/70">
-            I&apos;m a CS student at Galgotias University (Class of 2027), building full stack apps with
-            the MERN stack. My first real project was an AI powered resume builder that scores resumes
-            against job descriptions and rewrites weak bullet points using Claude. I&apos;m currently
-            deepening my MERN fundamentals through Harkirat Singh&apos;s 100xDevs cohort, with Next.js,
-            TypeScript, and WebSockets coming up next.
+            I&apos;m a CS student at Galgotias University, graduating in 2027. Most of what I build
+            uses the MERN stack. My first real project was a resume builder: it compares your resume
+            with a job description, gives it a score, and uses Claude to rewrite the weak bullet points.
+            Right now I&apos;m going through Harkirat Singh&apos;s 100xDevs cohort to get better at the
+            basics. Next.js, TypeScript and WebSockets come after that.
           </p>
           <p className="mt-4 text-foreground/70">
-            Outside of coursework, I&apos;m the Management Lead for GDG on Campus at Galgotias University,
-            running technical events, hackathons, and workshops end to end &mdash; and I placed 2nd
-            runner up at the GDG Noida DevFest Buildathon 2025 with SentraSec AI.
+            Outside class, I&apos;m the Management Lead for GDG on Campus at Galgotias, so a lot of my
+            time goes into planning hackathons and workshops and making sure they actually happen. At
+            the GDG Noida DevFest Buildathon 2025, my team came 2nd runner up with SentraSec AI.
           </p>
 
           <dl className="mt-8 divide-y divide-foreground/10 border-y border-foreground/10">

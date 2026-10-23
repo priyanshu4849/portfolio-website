@@ -108,7 +108,7 @@ export default function Hero() {
           className="flex flex-col items-center gap-5 sm:items-end"
         >
           <p className="max-w-[15rem] text-base text-white/80 sm:text-right sm:text-lg lg:max-w-[17rem]">
-            Full-stack developer building AI-powered web apps &mdash; MERN, Next.js, and a lot of debugging.
+            CS student who builds full stack web apps with MERN and Next.js.
           </p>
           {/* Two clear next steps for a visitor: see the work, or grab the resume.
               `download` makes the browser save the PDF instead of navigating to it. */}

@@ -23,7 +23,7 @@ const groups = [
   },
   {
     title: "Tools",
-    usedIn: "Building, testing, and shipping",
+    usedIn: "Every project",
     skills: ["Git & GitHub", "Postman", "Vercel"],
   },
 ];
@@ -45,8 +45,8 @@ export default function Skills() {
         <SectionHeading
           index="02"
           label="Skills"
-          title="What I reach for."
-          subtitle="Grouped by what they do, with where I've actually used them."
+          title="What I work with."
+          subtitle="Each group says where I've used it."
         />
 
         <motion.ul
