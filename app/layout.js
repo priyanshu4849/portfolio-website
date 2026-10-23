@@ -26,6 +26,9 @@ export const metadata = {
   metadataBase: new URL("https://priyanshu4849.me"),
   title: "Priyanshu Saini — Portfolio",
   description,
+  // Tells Google which address is the real one, so www and the old vercel.app
+  // names (which redirect here anyway) never count as duplicate copies.
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Priyanshu Saini — Full-stack developer",
     description,

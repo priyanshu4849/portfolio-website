@@ -239,6 +239,29 @@ describe("privacy of public files", () => {
   }
 });
 
+describe("search engines", () => {
+  test("robots.txt allows crawling and points at the sitemap", async () => {
+    const res = await fetch(BASE_URL + "/robots.txt");
+    assert.equal(res.status, 200);
+    const text = await res.text();
+    assert.match(text, /Allow: \/\n/);
+    assert.doesNotMatch(text, /Disallow: \/\n/);
+    assert.match(text, /Sitemap: https:\/\/priyanshu4849\.me\/sitemap\.xml/);
+  });
+
+  test("sitemap.xml lists the homepage on the real domain", async () => {
+    const res = await fetch(BASE_URL + "/sitemap.xml");
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get("content-type"), /xml/);
+    assert.match(await res.text(), /<loc>https:\/\/priyanshu4849\.me<\/loc>/);
+  });
+
+  test("homepage names its canonical address", () => {
+    const canonical = tags("link").find((l) => l.rel === "canonical");
+    assert.equal(canonical?.href, "https://priyanshu4849.me");
+  });
+});
+
 describe("old addresses", () => {
   // The old *.vercel.app names only exist on Vercel, so this only runs against the live site
   const live = BASE_URL === "https://priyanshu4849.me";
