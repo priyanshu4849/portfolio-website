@@ -62,11 +62,17 @@ export default function Hero() {
         >
           <source src="/hero.mp4" type="video/mp4" />
         </video>
+        {/* `unoptimized` keeps the URL exactly /hero-poster.jpg, the same file the video's
+            poster uses. `preload` then loads that one file early, so the poster (the
+            biggest thing on screen) shows sooner and is only downloaded once. Without it,
+            Next.js would preload a resized copy at a different URL that most visitors never see.
+            (`preload` replaced the older `priority` prop in Next.js 16.) */}
         <Image
           src="/hero-poster.jpg"
           alt="3D animated portrait of Priyanshu"
           fill
-          priority
+          preload
+          unoptimized
           sizes="100vw"
           className="hidden object-cover motion-reduce:block"
         />
