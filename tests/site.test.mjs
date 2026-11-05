@@ -172,6 +172,17 @@ describe("assets", () => {
     assert.equal(poster.status, 200);
   });
 
+  test("phones get the smaller portrait video", async () => {
+    const res = await fetch(BASE_URL + "/hero-mobile.mp4", { method: "HEAD" });
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get("content-type"), /video\/mp4/);
+    // the whole point of this file: it must stay well under the 3 MB wide video
+    assert.ok(Number(res.headers.get("content-length")) < 1.5 * 1024 * 1024, "phone video is over 1.5 MB");
+    const html = await (await fetch(BASE_URL + "/")).text();
+    assert.match(html, /<source src="\/hero\.mp4"[^>]*media="\(min-aspect-ratio: 9\/16\)"/, "wide video has no media query");
+    assert.match(html, /<source src="\/hero-mobile\.mp4"/, "phone video missing from the page");
+  });
+
   test("link-preview image is generated", async () => {
     const res = await fetch(BASE_URL + "/opengraph-image");
     assert.equal(res.status, 200);

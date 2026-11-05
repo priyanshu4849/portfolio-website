@@ -60,7 +60,13 @@ export default function Hero() {
           aria-hidden="true"
           className="h-full w-full object-cover motion-reduce:hidden"
         >
-          <source src="/hero.mp4" type="video/mp4" />
+          {/* A phone held upright only ever shows the middle third of the wide video, so
+              tall screens get a portrait crop of just that middle (hero-mobile.mp4, ~1 MB
+              instead of ~3 MB, same pixels on screen). The browser uses the first <source>
+              whose media query matches. The wide one is listed first so a browser too old
+              to understand `media` falls back to it rather than to the narrow crop. */}
+          <source src="/hero.mp4" type="video/mp4" media="(min-aspect-ratio: 9/16)" />
+          <source src="/hero-mobile.mp4" type="video/mp4" />
         </video>
         {/* `unoptimized` keeps the URL exactly /hero-poster.jpg, the same file the video's
             poster uses. `preload` then loads that one file early, so the poster (the
