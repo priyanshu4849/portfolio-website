@@ -27,15 +27,11 @@ export default function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
 
+  // Each word fades up 0.08s after the one before it. This is a CSS animation
+  // (animate-fade-up in globals.css), not Motion, so it starts as soon as the page
+  // is drawn instead of waiting for JavaScript. motion-reduce:animate-none shows the
+  // text straight away for visitors who've turned on "reduce motion".
   const headlineWords = "Hi, I'm Priyanshu.".split(" ");
-  const headlineContainer = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-  };
-  const wordVariant = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-  };
 
   return (
     <section
@@ -97,27 +93,22 @@ export default function Hero() {
       />
 
       <div className="relative z-10 flex w-full flex-col items-center gap-6 px-6 pb-16 text-center text-white sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:px-10 sm:pb-16 sm:text-left lg:px-16 lg:pb-20">
-        <motion.h1
-          variants={headlineContainer}
-          initial="hidden"
-          animate="show"
-          className="flex max-w-xs flex-wrap justify-center gap-x-2 text-3xl font-bold sm:justify-start sm:text-4xl lg:max-w-sm lg:text-5xl"
-        >
+        <h1 className="flex max-w-xs flex-wrap justify-center gap-x-2 text-3xl font-bold sm:justify-start sm:text-4xl lg:max-w-sm lg:text-5xl">
           {headlineWords.map((word, i) => (
-            <motion.span
+            <span
               key={i}
-              variants={wordVariant}
-              className={i === headlineWords.length - 1 ? "text-accent" : undefined}
+              className={`animate-fade-up motion-reduce:animate-none ${
+                i === headlineWords.length - 1 ? "text-accent" : ""
+              }`}
+              style={{ animationDelay: `${0.1 + i * 0.08}s` }}
             >
               {word}
-            </motion.span>
+            </span>
           ))}
-        </motion.h1>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-          className="flex flex-col items-center gap-5 sm:items-end"
+        </h1>
+        <div
+          className="flex animate-fade-up flex-col items-center gap-5 motion-reduce:animate-none sm:items-end"
+          style={{ animationDuration: "0.5s", animationDelay: "0.1s" }}
         >
           <p className="max-w-[15rem] text-base text-white/80 sm:text-right sm:text-lg lg:max-w-[17rem]">
             CS student who builds full stack web apps with MERN and Next.js.
@@ -139,7 +130,7 @@ export default function Hero() {
               Resume ↓
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

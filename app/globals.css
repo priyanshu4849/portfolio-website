@@ -18,6 +18,23 @@
   --font-display: var(--font-space-grotesk);
 }
 
+/* The hero text's entrance: fade in while rising 20px. This is plain CSS rather than
+   Motion so it starts the moment the page is drawn. A Motion fade can only start once
+   all the JavaScript has downloaded and React has started up, which on a slow phone
+   kept the tagline invisible for about 2 seconds and made it the slowest part of the
+   page load (Largest Contentful Paint). `both` keeps the text hidden during any
+   animation-delay and visible once it ends. Creates the `animate-fade-up` class. */
+@theme {
+  --animate-fade-up: fade-up 0.4s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
