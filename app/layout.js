@@ -45,7 +45,7 @@ export const metadata = {
 
 // Tints the mobile browser's address bar to match the page background.
 export const viewport = {
-  themeColor: "#1f2023",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({ children }) {

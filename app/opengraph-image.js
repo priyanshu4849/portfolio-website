@@ -20,7 +20,7 @@ export default async function Image() {
 
   return new ImageResponse(
     (
-      <div style={{ display: "flex", width: "100%", height: "100%", background: "#1f2023" }}>
+      <div style={{ display: "flex", width: "100%", height: "100%", background: "#000000" }}>
         {/* The 3D portrait on the right half, faded into the background on its
             left edge so there's no hard seam next to the text */}
         <img
@@ -36,7 +36,7 @@ export default async function Image() {
             top: 0,
             width: 200,
             height: 630,
-            backgroundImage: "linear-gradient(to right, #1f2023, rgba(31,32,35,0))",
+            backgroundImage: "linear-gradient(to right, #000000, rgba(0,0,0,0))",
           }}
         />
 

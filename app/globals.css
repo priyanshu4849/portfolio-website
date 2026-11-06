@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* One fixed palette, sampled from the hero video: the page background matches
-   the charcoal at the edges of the video's vignette, so the video blends into
-   the page instead of sitting in a box, and the accent echoes the character's
-   warm skin tone. */
+/* One fixed palette. The page is pure black (it used to be the charcoal from the
+   hero video's edges, #1f2023), so the hero video and the project screenshots read
+   as lit objects on a dark stage, the way Apple's dark product pages do. The accent
+   echoes the character's warm skin tone. */
 :root {
-  --background: #1f2023;
+  --background: #000000;
   --foreground: #f2f2f0;
   --accent: #e8b28f;
 }
