@@ -193,6 +193,15 @@ describe("assets", () => {
     }
   });
 
+  test("community numbers are real in the HTML, not the 0 they count up from", async () => {
+    const html = await (await fetch(BASE_URL + "/")).text();
+    // the screen reader copy (sr-only) and the counting copy should both start at the final value
+    for (const n of ["~(?:<!-- -->)?300", "12", "26", "100"]) {
+      assert.match(html, new RegExp(`sr-only">${n}<`), `screen reader number ${n} missing`);
+      assert.match(html, new RegExp(`<span>${n.replace(/^~.*?\)\?/, "")}</span>`), `counting number ${n} doesn't start at its final value`);
+    }
+  });
+
   test("link-preview image is generated", async () => {
     const res = await fetch(BASE_URL + "/opengraph-image");
     assert.equal(res.status, 200);

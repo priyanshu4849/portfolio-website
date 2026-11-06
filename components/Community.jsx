@@ -1,14 +1,60 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
+import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import SectionHeading from "./SectionHeading";
 
+// `value` is the number that counts up; `prefix` is shown in front of it unchanged.
 const stats = [
-  { value: "~300", label: "people at TechSprint, our 36 hour offline hackathon" },
-  { value: "12", label: "events so far, including hackathons, workshops and study jams" },
-  { value: "26", label: "volunteers I coordinate" },
-  { value: "100", label: "students who earned Google swag through the Solution Challenge" },
+  { prefix: "~", value: 300, label: "people at TechSprint, our 36 hour offline hackathon" },
+  { value: 12, label: "events so far, including hackathons, workshops and study jams" },
+  { value: 26, label: "volunteers I coordinate" },
+  { value: 100, label: "students who earned Google swag through the Solution Challenge" },
 ];
+
+// A number that counts up from 0 the first time it scrolls into view.
+function CountUp({ value, prefix = "", delay = 0 }) {
+  const ref = useRef(null);
+  // `once`: count up the first time only, not every time it scrolls past.
+  // `amount: 0.6`: wait until most of the number is on screen, so the count isn't
+  // half over before anyone sees it.
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduceMotion = useReducedMotion();
+
+  // The count lives in a motion value, not React state. Motion writes each new number
+  // straight into the page, so React doesn't re-render 60 times a second.
+  // It starts at the final value, so the HTML the server sends already says 300, 12, 26
+  // and 100. That's what Google and visitors without JavaScript see.
+  const count = useMotionValue(value);
+  const rounded = useTransform(count, (v) => Math.round(v));
+
+  // In the browser, drop it to 0 straight away so it can count up. This runs before the
+  // section is anywhere near the screen, so nobody sees the jump from 300 to 0.
+  useEffect(() => {
+    if (!reduceMotion) count.set(0);
+  }, [count, reduceMotion]);
+
+  useEffect(() => {
+    if (!inView || reduceMotion) return;
+    // Fast at the start, slowing down as it lands: the cubic bezier is a strong "ease out".
+    const controls = animate(count, value, { duration: 1.6, delay, ease: [0.16, 1, 0.3, 1] });
+    return () => controls.stop();
+  }, [inView, reduceMotion, count, value, delay]);
+
+  return (
+    <p ref={ref} className="font-display text-5xl font-bold tracking-tight text-accent tabular-nums sm:text-6xl lg:text-7xl">
+      {/* Screen readers get the final number once, instead of every number on the way up. */}
+      <span className="sr-only">
+        {prefix}
+        {value}
+      </span>
+      <span aria-hidden="true">
+        {prefix}
+        <motion.span>{rounded}</motion.span>
+      </span>
+    </p>
+  );
+}
 
 const responsibilities = [
   "I handle event operations: venues, logistics, schedules and travel allowances.",
@@ -52,21 +98,19 @@ export default function Community() {
           </p>
         </motion.div>
 
+        {/* Big numbers that count up, each with a thin rule above it instead of a box */}
         <motion.ul
           variants={listVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4"
+          className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4"
         >
-          {stats.map((stat) => (
-            <motion.li
-              key={stat.label}
-              variants={itemVariants}
-              className="rounded-2xl border border-foreground/10 bg-foreground/5 p-5"
-            >
-              <p className="font-display text-3xl font-bold text-accent">{stat.value}</p>
-              <p className="mt-2 text-xs leading-relaxed text-foreground/70">{stat.label}</p>
+          {stats.map((stat, i) => (
+            <motion.li key={stat.label} variants={itemVariants} className="border-t border-foreground/15 pt-5">
+              {/* Each number starts 0.15s after the one before it, so they land left to right */}
+              <CountUp value={stat.value} prefix={stat.prefix} delay={i * 0.15} />
+              <p className="mt-3 max-w-[14rem] text-sm leading-relaxed text-foreground/60">{stat.label}</p>
             </motion.li>
           ))}
         </motion.ul>
