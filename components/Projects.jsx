@@ -1,12 +1,14 @@
 "use client";
 
+import { Fragment } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
+import AtsStory from "./AtsStory";
 
 // Each card is rendered from this list — adding a project means adding an
 // object here, not copying JSX. Optional fields (`award`, `role`, `hardestBug`) only render
-// when present.
+// when present. `showStory` adds the scroll walkthrough under the card.
 const projects = [
   {
     title: "ATS Resume Builder",
@@ -19,6 +21,7 @@ const projects = [
     techStack: ["React", "Node.js", "Express", "MongoDB", "Claude API", "JWT Auth", "Tailwind CSS", "Motion"],
     liveUrl: "https://ats-resume-builder-ten-xi.vercel.app",
     githubUrl: "https://github.com/priyanshu4849/ats-resume-builder",
+    showStory: true,
   },
   {
     title: "SentraSec AI",
@@ -58,80 +61,85 @@ export default function Projects() {
 
       <div className="mx-auto mt-10 flex max-w-5xl flex-col gap-10">
         {projects.map((project, i) => (
-          <motion.article
-            key={project.title}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            // Every other card flips the image to the right on desktop, so the
-            // section reads as a zig-zag rather than a stack of identical boxes.
-            className={`flex flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5 ${
-              i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
-            }`}
-          >
-            <motion.div variants={itemVariants} className="relative aspect-video w-full bg-black/25 lg:aspect-auto lg:w-1/2">
-              <Image
-                src={project.image}
-                alt={project.imageAlt}
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain"
-              />
-            </motion.div>
+          <Fragment key={project.title}>
+            <motion.article
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              // Every other card flips the image to the right on desktop, so the
+              // section reads as a zig-zag rather than a stack of identical boxes.
+              className={`flex flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5 ${
+                i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
+              }`}
+            >
+              <motion.div variants={itemVariants} className="relative aspect-video w-full bg-black/25 lg:aspect-auto lg:w-1/2">
+                <Image
+                  src={project.image}
+                  alt={project.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-contain"
+                />
+              </motion.div>
 
-            <motion.div variants={itemVariants} className="flex w-full flex-col justify-center gap-4 p-6 sm:p-8 lg:w-1/2">
-              <div>
-                {project.award && (
-                  <p className="mb-3 inline-block rounded-xl bg-accent/15 px-3 py-1 text-xs font-medium text-accent">
-                    {project.award}
-                  </p>
-                )}
-                <h3 className="text-xl font-bold">{project.title}</h3>
-                <p className="mt-2 text-sm text-foreground/70">{project.description}</p>
-                {project.role && <p className="mt-3 text-sm text-foreground/50">{project.role}</p>}
-              </div>
-
-              {/* One real problem and how it got solved — says more about how I
-                  work than a feature list does */}
-              {project.hardestBug && (
-                <div className="rounded-2xl border-l-2 border-accent bg-background/50 px-4 py-3">
-                  <p className="text-xs font-medium uppercase tracking-widest text-accent">Hardest bug</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-foreground/70">{project.hardestBug}</p>
+              <motion.div variants={itemVariants} className="flex w-full flex-col justify-center gap-4 p-6 sm:p-8 lg:w-1/2">
+                <div>
+                  {project.award && (
+                    <p className="mb-3 inline-block rounded-xl bg-accent/15 px-3 py-1 text-xs font-medium text-accent">
+                      {project.award}
+                    </p>
+                  )}
+                  <h3 className="text-xl font-bold">{project.title}</h3>
+                  <p className="mt-2 text-sm text-foreground/70">{project.description}</p>
+                  {project.role && <p className="mt-3 text-sm text-foreground/50">{project.role}</p>}
                 </div>
-              )}
 
-              <ul className="flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="rounded-full border border-foreground/15 bg-foreground/5 px-3 py-1 text-xs font-medium"
+                {/* One real problem and how it got solved — says more about how I
+                    work than a feature list does */}
+                {project.hardestBug && (
+                  <div className="rounded-2xl border-l-2 border-accent bg-background/50 px-4 py-3">
+                    <p className="text-xs font-medium uppercase tracking-widest text-accent">Hardest bug</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-foreground/70">{project.hardestBug}</p>
+                  </div>
+                )}
+
+                <ul className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-full border border-foreground/15 bg-foreground/5 px-3 py-1 text-xs font-medium"
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-2 flex flex-wrap gap-3">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
                   >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+                    Live site
+                  </a>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/5"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </motion.div>
+            </motion.article>
 
-              <div className="mt-2 flex flex-wrap gap-3">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
-                >
-                  Live site
-                </a>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/5"
-                >
-                  GitHub
-                </a>
-              </div>
-            </motion.div>
-          </motion.article>
+            {/* Right after the ATS Resume Builder card: the pinned, scroll driven walkthrough
+                of how it works (components/AtsStory.jsx). */}
+            {project.showStory && <AtsStory />}
+          </Fragment>
         ))}
       </div>
     </section>

@@ -183,6 +183,16 @@ describe("assets", () => {
     assert.match(html, /<source src="\/hero-mobile\.mp4"/, "phone video missing from the page");
   });
 
+  test("ATS walkthrough has its four screenshots", async () => {
+    const html = await (await fetch(BASE_URL + "/")).text();
+    assert.match(html, /From a PDF to a resume that fits the job\./, "walkthrough missing from the page");
+    for (let i = 1; i <= 4; i++) {
+      const res = await fetch(`${BASE_URL}/ats-story/step-${i}.jpg`, { method: "HEAD" });
+      assert.equal(res.status, 200, `step-${i}.jpg missing`);
+      assert.match(res.headers.get("content-type"), /image\/jpeg/);
+    }
+  });
+
   test("link-preview image is generated", async () => {
     const res = await fetch(BASE_URL + "/opengraph-image");
     assert.equal(res.status, 200);
