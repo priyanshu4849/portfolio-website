@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "motion/react";
+import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 
 // The four steps of the ATS Resume Builder, each with a real screenshot of the app.
 // The screenshots were taken on a local copy of the app with a made up sample resume
@@ -40,7 +41,7 @@ const APP_URL = "ats-resume-builder-ten-xi.vercel.app";
 const SHOT_ASPECT = "aspect-[1400/1009]";
 
 export default function AtsStory() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   // Visitors who've turned on "reduce motion" get the same four steps as a plain list.
   return reduceMotion ? <StaticStory /> : <PinnedStory />;
 }

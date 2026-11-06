@@ -39,7 +39,7 @@ const tileVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="border-b border-foreground/10 px-6 py-24">
+    <section id="skills" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           index="02"

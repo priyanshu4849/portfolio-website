@@ -39,7 +39,12 @@ export default function Nav() {
         <ul className="hidden items-center gap-8 text-sm font-medium sm:flex">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="text-white/80 transition-colors hover:text-white">
+              {/* The peach underline is an ::after line scaled to 0 width, growing from the
+                  left on hover */}
+              <a
+                href={link.href}
+                className="relative text-white/80 transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
+              >
                 {link.label}
               </a>
             </li>

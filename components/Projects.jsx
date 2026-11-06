@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
+import Magnetic from "./Magnetic";
 import AtsStory from "./AtsStory";
 
 // Each card is rendered from this list — adding a project means adding an
@@ -42,6 +43,14 @@ const cardVariants = {
   show: { transition: { staggerChildren: 0.1 } },
 };
 
+// The screenshot wipes in from the side its card sits on: from the left for the first
+// card, from the right for the second (the cards zig-zag). `custom` is the card's index.
+// Both ends list all four inset values so Motion can animate between them.
+const imageVariants = {
+  hidden: (i) => ({ clipPath: i % 2 === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)" }),
+  show: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
+};
+
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
@@ -49,7 +58,7 @@ const itemVariants = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="border-b border-foreground/10 px-6 py-24">
+    <section id="projects" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           index="03"
@@ -73,7 +82,7 @@ export default function Projects() {
                 i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
               }`}
             >
-              <motion.div variants={itemVariants} className="relative aspect-video w-full bg-black/25 lg:aspect-auto lg:w-1/2">
+              <motion.div variants={imageVariants} custom={i} className="relative aspect-video w-full bg-black/25 lg:aspect-auto lg:w-1/2">
                 <Image
                   src={project.image}
                   alt={project.imageAlt}
@@ -116,22 +125,26 @@ export default function Projects() {
                 </ul>
 
                 <div className="mt-2 flex flex-wrap gap-3">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
-                  >
-                    Live site
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/5"
-                  >
-                    GitHub
-                  </a>
+                  <Magnetic>
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+                    >
+                      Live site
+                    </a>
+                  </Magnetic>
+                  <Magnetic>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-foreground/5"
+                    >
+                      GitHub
+                    </a>
+                  </Magnetic>
                 </div>
               </motion.div>
             </motion.article>

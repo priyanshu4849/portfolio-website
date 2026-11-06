@@ -74,7 +74,7 @@ const itemVariants = {
 
 export default function Community() {
   return (
-    <section id="community" className="border-b border-foreground/10 px-6 py-24">
+    <section id="community" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           index="04"
@@ -83,19 +83,34 @@ export default function Community() {
           subtitle="What I do when I'm not coding."
         />
 
-        {/* Role header with an accent rule, so it reads like an entry on a timeline */}
+        {/* Role header with an accent rule, so it reads like an entry on a timeline. The rule
+            draws downward first, then the text slides in beside it. */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-10 border-l-2 border-accent pl-5"
+          className="relative mt-10 pl-5"
         >
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">Since Sep 2025</p>
-          <h3 className="mt-2 text-xl font-bold sm:text-2xl">Management Lead · GDG on Campus</h3>
-          <p className="mt-1 text-sm text-foreground/60">
-            Galgotias University · one of 8 core team members
-          </p>
+          <motion.span
+            aria-hidden="true"
+            variants={{
+              hidden: { scaleY: 0 },
+              show: { scaleY: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="absolute top-0 bottom-0 left-0 w-0.5 origin-top bg-accent"
+          />
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, x: -16 },
+              show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 } },
+            }}
+          >
+            <p className="text-xs font-medium uppercase tracking-widest text-accent">Since Sep 2025</p>
+            <h3 className="mt-2 text-xl font-bold sm:text-2xl">Management Lead · GDG on Campus</h3>
+            <p className="mt-1 text-sm text-foreground/60">
+              Galgotias University · one of 8 core team members
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Big numbers that count up, each with a thin rule above it instead of a box */}

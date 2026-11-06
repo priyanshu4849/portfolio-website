@@ -1,7 +1,9 @@
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import Nav from "@/components/Nav";
+import Providers from "@/components/Providers";
 import ScrollProgress from "@/components/ScrollProgress";
 
 // Space Grotesk for headings, DM Sans for everything else — both are variable
@@ -55,9 +57,12 @@ export default function RootLayout({ children }) {
       className={`${spaceGrotesk.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ScrollProgress />
-        <Nav />
-        {children}
+        {/* Smooth scrolling and the site-wide "reduce motion" setting (components/Providers.jsx) */}
+        <Providers>
+          <ScrollProgress />
+          <Nav />
+          {children}
+        </Providers>
         {/* Counts page views on the deployed site (Vercel dashboard → Analytics).
             Does nothing in local dev, so testing here never inflates the numbers. */}
         <Analytics />

@@ -18,7 +18,7 @@ const fadeUp = {
 
 export default function About() {
   return (
-    <section id="about" className="border-b border-foreground/10 px-6 py-24">
+    <section id="about" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         {/* Same numbered label as every other section (see SectionHeading.jsx). The heading
             itself is bigger here and lights up word by word as you scroll, so it's written
@@ -33,20 +33,40 @@ export default function About() {
 
         {/* Under the statement: the photo on the left, the details on the right */}
         <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* The photo wipes in from the bottom while the picture inside settles from a
+              slight zoom, like a shutter opening. The "in view" trigger is on this column,
+              not on the photo: while the photo is fully clipped, the browser counts it as
+              not visible at all, so a trigger on the photo itself never fired and the photo
+              stayed hidden. The column passes "show" down to the photo through variants. */}
           <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
             className="lg:col-span-4"
           >
-            <div className="relative aspect-square w-40 overflow-hidden rounded-3xl ring-1 ring-foreground/10 sm:w-56">
-              <Image
-                src="/profile.jpg"
-                alt="Priyanshu Saini at GDG Noida DevFest 2025"
-                fill
-                sizes="224px"
-                className="object-cover"
-              />
-            </div>
+            <motion.div
+              variants={{
+                hidden: { clipPath: "inset(100% 0% 0% 0%)" },
+                show: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
+              }}
+              className="relative aspect-square w-40 overflow-hidden rounded-3xl ring-1 ring-foreground/10 sm:w-56"
+            >
+              <motion.div
+                variants={{
+                  hidden: { scale: 1.15 },
+                  show: { scale: 1, transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src="/profile.jpg"
+                  alt="Priyanshu Saini at GDG Noida DevFest 2025"
+                  fill
+                  sizes="224px"
+                  className="object-cover"
+                />
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           <motion.div

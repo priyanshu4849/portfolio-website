@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Magnetic from "./Magnetic";
+import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -34,7 +35,7 @@ const CARD_RADIUS = 28;
 export default function Hero() {
   const sectionRef = useRef(null);
   const stageRef = useRef(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -226,19 +227,24 @@ export default function Hero() {
             {/* Two clear next steps for a visitor: see the work, or grab the resume.
                 `download` makes the browser save the PDF instead of navigating to it. */}
             <div className="flex gap-3">
-              <a
-                href="#projects"
-                className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
-              >
-                See my work
-              </a>
-              <a
-                href="/Priyanshu_Saini_Resume.pdf"
-                download
-                className="rounded-full border border-white/30 bg-white/5 px-5 py-2.5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white/15"
-              >
-                Resume ↓
-              </a>
+              {/* Magnetic: the buttons lean toward the cursor (components/Magnetic.jsx) */}
+              <Magnetic>
+                <a
+                  href="#projects"
+                  className="block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+                >
+                  See my work
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a
+                  href="/Priyanshu_Saini_Resume.pdf"
+                  download
+                  className="block rounded-full border border-white/30 bg-white/5 px-5 py-2.5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white/15"
+                >
+                  Resume ↓
+                </a>
+              </Magnetic>
             </div>
           </div>
         </motion.div>

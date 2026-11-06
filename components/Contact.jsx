@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
+import Magnetic from "./Magnetic";
 
 const links = [
   { label: "priyanshusaini4849@gmail.com", href: "mailto:priyanshusaini4849@gmail.com" },
@@ -21,7 +22,7 @@ const item = {
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-6 pt-24 pb-12">
+    <section id="contact" className="px-6 pt-24 pb-12 lg:pt-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           index="05"
@@ -37,26 +38,33 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.5 }}
           className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
         >
-          {/* The resume leads, since it's the one thing most recruiters want */}
-          <motion.a
-            variants={item}
-            href="/Priyanshu_Saini_Resume.pdf"
-            download
-            className="rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-85"
-          >
-            Download my resume (PDF)
-          </motion.a>
+          {/* The resume leads, since it's the one thing most recruiters want.
+              Each button fades in (motion.div), and leans toward the cursor (Magnetic).
+              w-full on phones keeps them as full width buttons, like before. */}
+          <motion.div variants={item}>
+            <Magnetic className="w-full sm:w-auto">
+              <a
+                href="/Priyanshu_Saini_Resume.pdf"
+                download
+                className="block rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-85"
+              >
+                Download my resume (PDF)
+              </a>
+            </Magnetic>
+          </motion.div>
           {links.map((link) => (
-            <motion.a
-              key={link.href}
-              variants={item}
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-center text-sm font-medium transition-colors hover:bg-foreground/10"
-            >
-              {link.label}
-            </motion.a>
+            <motion.div key={link.href} variants={item}>
+              <Magnetic className="w-full sm:w-auto">
+                <a
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="block rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-center text-sm font-medium transition-colors hover:bg-foreground/10"
+                >
+                  {link.label}
+                </a>
+              </Magnetic>
+            </motion.div>
           ))}
         </motion.div>
 

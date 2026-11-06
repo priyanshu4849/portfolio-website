@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 
 // How bright a word is before its turn: dim enough that the lit words stand out,
 // bright enough to still be readable if JavaScript is slow to load.
@@ -13,7 +14,7 @@ const DIM = 0.15;
 // heading, just with each word wrapped in a <span>.
 export default function ScrollRevealText({ text, as: Tag = "h2", className = "" }) {
   const ref = useRef(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   // 0 when the top of the text reaches 90% of the way down the screen, 1 when the bottom
   // of the text is 70% of the way down. Finishing that low matters: clicking "About" in
