@@ -96,6 +96,17 @@ describe("files that must never be served", () => {
     const res = await fetch(BASE_URL + "/this-page-does-not-exist");
     assert.equal(res.status, 404);
   });
+
+  test("the 404 page is the custom one, kept out of Google, with links back home", async () => {
+    const res = await fetch(BASE_URL + "/this-page-does-not-exist");
+    const page = await res.text();
+    assert.match(page, /This page doesn(&#x27;|')t exist/);
+    assert.match(page, /<title>Page not found/);
+    assert.match(page, /<meta name="robots" content="noindex"/);
+    // The nav's section links must lead back to the home page, not to "#about" on this page
+    assert.match(page, /href="\/#about"/);
+    assert.doesNotMatch(page, /href="#about"/);
+  });
 });
 
 describe("links and markup", () => {

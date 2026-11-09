@@ -4,7 +4,6 @@ import "./globals.css";
 import "lenis/dist/lenis.css";
 import Nav from "@/components/Nav";
 import Providers from "@/components/Providers";
-import ScrollProgress from "@/components/ScrollProgress";
 
 // Space Grotesk for headings, DM Sans for everything else — both are variable
 // fonts, so no `weight` list is needed.
@@ -59,7 +58,6 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         {/* Smooth scrolling and the site-wide "reduce motion" setting (components/Providers.jsx) */}
         <Providers>
-          <ScrollProgress />
           <Nav />
           {children}
         </Providers>

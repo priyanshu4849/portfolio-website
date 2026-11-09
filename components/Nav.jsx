@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
 const LINKS = [
@@ -14,6 +15,12 @@ const LINKS = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
 
+  // The nav also shows on the 404 page, where there's no #about to scroll to. Off the
+  // home page every link points back home first ("/#about"), and the browser opens the
+  // home page at that section.
+  const onHome = usePathname() === "/";
+  const to = (hash) => (onHome ? hash : `/${hash}`);
+
   // Closing the mobile menu collapses its height via AnimatePresence's exit
   // animation — if the browser's native anchor-scroll fires at the same
   // instant, it targets a layout that's still shifting, and the two end up
@@ -21,6 +28,11 @@ export default function Nav() {
   // scrolls). Close the menu first, then scroll manually once the collapse
   // animation has had time to finish.
   function handleLinkClick(e, href) {
+    // Off the home page, let the link do a normal page load to "/#section"
+    if (!onHome) {
+      setOpen(false);
+      return;
+    }
     e.preventDefault();
     setOpen(false);
     window.setTimeout(() => {
@@ -31,7 +43,7 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav className="flex items-center justify-between bg-background/60 px-6 py-4 text-white backdrop-blur-md sm:px-10">
-        <a href="#hero" className="font-display font-bold tracking-tight" onClick={() => setOpen(false)}>
+        <a href={onHome ? "#hero" : "/"} className="font-display font-bold tracking-tight" onClick={() => setOpen(false)}>
           Priyanshu
         </a>
 
@@ -42,7 +54,7 @@ export default function Nav() {
               {/* The peach underline is an ::after line scaled to 0 width, growing from the
                   left on hover */}
               <a
-                href={link.href}
+                href={to(link.href)}
                 className="relative text-white/80 transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
               >
                 {link.label}
@@ -86,7 +98,7 @@ export default function Nav() {
             {LINKS.map((link) => (
               <li key={link.href} className="border-t border-white/10">
                 <a
-                  href={link.href}
+                  href={to(link.href)}
                   onClick={(e) => handleLinkClick(e, link.href)}
                   className="block px-6 py-4 text-sm font-medium text-white/80 hover:text-white"
                 >
