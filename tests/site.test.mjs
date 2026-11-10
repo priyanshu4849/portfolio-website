@@ -109,6 +109,17 @@ describe("files that must never be served", () => {
   });
 });
 
+describe("GitHub tile", () => {
+  // The tile is built from live GitHub data. If GitHub was unreachable at build time it
+  // shows a plain link instead, so either one counts, but the tile must never be missing.
+  test("Skills has the GitHub tile, with real activity or the fallback link", () => {
+    assert.match(html, /On GitHub/);
+    const hasGrid = /contributions? on \d+ days? in the last 16 weeks on GitHub/.test(html);
+    const hasFallback = /See my code on GitHub/.test(html);
+    assert.ok(hasGrid || hasFallback, "neither the activity grid nor the fallback link is in the HTML");
+  });
+});
+
 describe("links and markup", () => {
   test("every link that opens a new tab has rel=noopener", () => {
     const newTab = tags("a").filter((a) => a.target === "_blank");
