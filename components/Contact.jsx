@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
 import Magnetic from "./Magnetic";
+import AskMe from "./AskMe";
 
 const links = [
   { label: "priyanshusaini4849@gmail.com", href: "mailto:priyanshusaini4849@gmail.com" },
@@ -67,6 +68,9 @@ export default function Contact() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* The chat: a visitor can check whether I fit before they write (components/AskMe.jsx) */}
+        <AskMe />
 
         <motion.footer
           initial={{ opacity: 0 }}

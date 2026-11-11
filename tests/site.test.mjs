@@ -120,6 +120,30 @@ describe("GitHub tile", () => {
   });
 });
 
+describe("ask me anything chat", () => {
+  // These never reach Claude (and never cost anything): they stop at the route's own checks.
+  test("the chat is on the page", () => {
+    assert.match(html, /Ask me anything/);
+    assert.match(html, /id="ask-input"/);
+  });
+
+  test("the route rejects a request that isn't a conversation", async () => {
+    const post = (body) =>
+      fetch(BASE_URL + "/api/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body });
+    assert.equal((await post("not json")).status, 400);
+    assert.equal((await post(JSON.stringify({ messages: [] }))).status, 400);
+    // ends with an assistant turn, so there's no question to answer
+    assert.equal((await post(JSON.stringify({ messages: [{ role: "assistant", content: "hi" }] }))).status, 400);
+    // too long
+    assert.equal((await post(JSON.stringify({ messages: [{ role: "user", content: "x".repeat(501) }] }))).status, 400);
+  });
+
+  test("the route only answers POST", async () => {
+    const res = await fetch(BASE_URL + "/api/ask");
+    assert.equal(res.status, 405);
+  });
+});
+
 describe("links and markup", () => {
   test("every link that opens a new tab has rel=noopener", () => {
     const newTab = tags("a").filter((a) => a.target === "_blank");

@@ -24,6 +24,7 @@ export default async function Image() {
         {/* The 3D portrait on the right half, faded into the background on its
             left edge so there's no hard seam next to the text */}
         <img
+          alt=""
           src={`data:image/jpeg;base64,${poster}`}
           width={640}
           height={630}

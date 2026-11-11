@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import Magnetic from "./Magnetic";
 
@@ -127,20 +128,20 @@ export default function NotFound() {
           className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
         >
           <Magnetic className="w-full sm:w-auto">
-            <a
+            <Link
               href="/"
               className="block rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-background transition-opacity hover:opacity-85"
             >
               Back to home
-            </a>
+            </Link>
           </Magnetic>
           <Magnetic className="w-full sm:w-auto">
-            <a
+            <Link
               href="/#projects"
               className="block rounded-full border border-foreground/15 bg-foreground/5 px-5 py-2.5 text-center text-sm font-medium transition-colors hover:bg-foreground/10"
             >
               See my projects
-            </a>
+            </Link>
           </Magnetic>
         </motion.div>
       </div>
