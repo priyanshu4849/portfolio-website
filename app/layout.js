@@ -4,6 +4,7 @@ import "./globals.css";
 import "lenis/dist/lenis.css";
 import Nav from "@/components/Nav";
 import Providers from "@/components/Providers";
+import AskWidget from "@/components/AskWidget";
 
 // Space Grotesk for headings, DM Sans for everything else — both are variable
 // fonts, so no `weight` list is needed.
@@ -60,6 +61,8 @@ export default function RootLayout({ children }) {
         <Providers>
           <Nav />
           {children}
+          {/* The chat character in the bottom right corner (components/AskWidget.jsx) */}
+          <AskWidget />
         </Providers>
         {/* Counts page views on the deployed site (Vercel dashboard → Analytics).
             Does nothing in local dev, so testing here never inflates the numbers. */}

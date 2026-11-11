@@ -122,9 +122,10 @@ describe("GitHub tile", () => {
 
 describe("ask me anything chat", () => {
   // These never reach Claude (and never cost anything): they stop at the route's own checks.
-  test("the chat is on the page", () => {
-    assert.match(html, /Ask me anything/);
-    assert.match(html, /id="ask-input"/);
+  test("the chat character is on the page", () => {
+    // The panel only renders once opened, so the HTML has the launcher button, not the input
+    assert.match(html, /aria-label="Ask me anything"/);
+    assert.match(html, /aria-haspopup="dialog"/);
   });
 
   test("the route rejects a request that isn't a conversation", async () => {
