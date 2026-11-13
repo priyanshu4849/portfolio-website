@@ -76,7 +76,6 @@ export default function Contact() {
           className="mt-24 flex flex-col gap-2 border-t border-foreground/10 pt-6 text-xs leading-relaxed text-foreground/40 sm:flex-row sm:justify-between"
         >
           <p>Built with Next.js, Tailwind CSS and Motion.</p>
-          <p>The 3D version of me at the top was made with Google Flow.</p>
         </motion.footer>
       </div>
     </section>

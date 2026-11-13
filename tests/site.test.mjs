@@ -211,12 +211,18 @@ describe("assets", () => {
     }
   });
 
-  test("hero video and its poster load", async () => {
+  test("hero video and its still load, and the video plays once", async () => {
     const video = await fetch(BASE_URL + "/hero.mp4", { method: "HEAD" });
     assert.equal(video.status, 200);
     assert.match(video.headers.get("content-type"), /video\/mp4/);
-    const poster = await fetch(BASE_URL + "/hero-poster.jpg", { method: "HEAD" });
-    assert.equal(poster.status, 200);
+    const still = await fetch(BASE_URL + "/hero-still.jpg", { method: "HEAD" });
+    assert.equal(still.status, 200);
+    // The clip is an intro (black screen, typing, a flash) that ends on a still frame.
+    // Looping it would replay the black screen and the flash every 9 seconds.
+    const html = await (await fetch(BASE_URL + "/")).text();
+    const tag = html.match(/<video[^>]*>/);
+    assert.ok(tag, "no <video> in the page");
+    assert.doesNotMatch(tag[0], /\sloop/, "hero video loops");
   });
 
   test("phones get the smaller portrait video", async () => {

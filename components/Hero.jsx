@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Magnetic from "./Magnetic";
 import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
@@ -35,7 +35,20 @@ const CARD_RADIUS = 28;
 export default function Hero() {
   const sectionRef = useRef(null);
   const stageRef = useRef(null);
+  const videoRef = useRef(null);
   const reduceMotion = usePrefersReducedMotion();
+
+  // Some browsers refuse to autoplay even a muted video: an iPhone in Low Power Mode, or
+  // anyone who has switched autoplay off. The video starts on a black frame, so for them
+  // the hero would stay black. play() tells us: it fails with an error when autoplay is
+  // blocked, and then we show the still instead. Only a paused video that hasn't ended
+  // is checked, so a video that already played through is never restarted.
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (reduceMotion || !video || !video.paused || video.ended) return;
+    video.play().catch(() => setAutoplayBlocked(true));
+  }, [reduceMotion]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -85,7 +98,7 @@ export default function Hero() {
   // zooming out rather than just being cropped.
   const videoScale = useTransform(card, (c) => between(c, 0, 1, [1, 0.88]));
 
-  // The video's own background is the same charcoal as the page, so a bare clipped card
+  // The video's own background is almost the same black as the page, so a bare clipped card
   // would melt into it. This empty box sits exactly on the card's edges and adds a thin
   // light border and a soft shadow. (A border on the clipped video itself would be
   // clipped away too.)
@@ -116,41 +129,41 @@ export default function Hero() {
         onMouseMove={handleMouseMove}
         className="sticky top-0 flex h-svh w-full items-end justify-center overflow-hidden"
       >
-        {/* Full-screen 3D version of me, an AI-animated 10s loop. The poster is the
-            video's own first frame, so the swap from still to video is invisible.
+        {/* Full screen anime version of me. It types "> priyanshu.init()", flashes, and
+            I appear. It plays once and then stops on its last frame (no `loop`), which a
+            video does by itself when it ends. There's no poster on purpose: the clip
+            starts on black, the same as the page, so nothing visibly swaps when it starts.
             Visitors who've turned on "reduce motion" in their OS get only the still. */}
         <motion.div className="absolute inset-0" style={{ clipPath }}>
           <motion.div className="absolute inset-0" style={{ scale: videoScale }}>
             <video
+              ref={videoRef}
               autoPlay
               muted
-              loop
               playsInline
-              poster="/hero-poster.jpg"
               aria-hidden="true"
               className="h-full w-full object-cover motion-reduce:hidden"
             >
               {/* A phone held upright only ever shows the middle third of the wide video, so
                   tall screens get a portrait crop of just that middle (hero-mobile.mp4, ~1 MB
-                  instead of ~3 MB, same pixels on screen). The browser uses the first <source>
+                  instead of ~2 MB, same pixels on screen). The browser uses the first <source>
                   whose media query matches. The wide one is listed first so a browser too old
-                  to understand `media` falls back to it rather than to the narrow crop. */}
+                  to understand `media` falls back to it rather than to the narrow crop.
+                  In both files the typed line is scaled down until the flash, so it fits
+                  the narrowest screen that gets that file instead of being cut off. */}
               <source src="/hero.mp4" type="video/mp4" media="(min-aspect-ratio: 9/16)" />
               <source src="/hero-mobile.mp4" type="video/mp4" />
             </video>
-            {/* `unoptimized` keeps the URL exactly /hero-poster.jpg, the same file the video's
-                poster uses. `preload` then loads that one file early, so the poster (the
-                biggest thing on screen) shows sooner and is only downloaded once. Without it,
-                Next.js would preload a resized copy at a different URL that most visitors never see.
-                (`preload` replaced the older `priority` prop in Next.js 16.) */}
+            {/* The still is the video's last frame. It's only shown with "reduce motion" on
+                or when autoplay is blocked, so it's hidden (display: none) for everyone else.
+                Next.js lazy loads images by default, and a hidden lazy image is never
+                downloaded, so most visitors don't pay for it. */}
             <Image
-              src="/hero-poster.jpg"
-              alt="3D animated portrait of Priyanshu"
+              src="/hero-still.jpg"
+              alt="Anime style portrait of Priyanshu"
               fill
-              preload
-              unoptimized
               sizes="100vw"
-              className="hidden object-cover motion-reduce:block"
+              className={`object-cover ${autoplayBlocked ? "block" : "hidden motion-reduce:block"}`}
             />
           </motion.div>
 

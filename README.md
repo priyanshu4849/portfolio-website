@@ -1,6 +1,6 @@
 # Priyanshu Saini · Portfolio
 
-My personal portfolio site. It has a full screen, AI animated 3D version of me in the hero, plus the projects I've built and the community work I do on campus.
+My personal portfolio site. It has a full screen, animated anime version of me in the hero, plus the projects I've built and the community work I do on campus.
 
 **Live:** [priyanshu4849.me](https://priyanshu4849.me)
 
@@ -8,7 +8,7 @@ My personal portfolio site. It has a full screen, AI animated 3D version of me i
 
 ## Highlights
 
-- **3D animated hero.** I turned a photo of myself into a 3D character with Google Flow, then animated it into a 10 second loop. It plays as a muted `<video>` (no live 3D model), so it loads fast. The poster is the video's own first frame, so you never see the still swap to the video.
+- **Animated hero.** A 9 second anime style clip of me. It types `priyanshu.init()`, flashes, and then I appear. It plays once and stops on the last frame instead of looping. It's a muted `<video>`, so it loads fast. Phones get their own portrait cut, with the typed line scaled down so it isn't cut off. If the browser blocks autoplay (an iPhone in Low Power Mode, for example), you see the last frame as a still.
 - **Cursor tracking glow** that follows the mouse with spring physics. It's hidden on touchscreens, where there's no cursor to follow.
 - **Scroll animations** built with Motion: a parallax zoom and fade on the hero, staggered reveals as each section scrolls in, and a progress bar at the top of the page.
 - **Accessible motion.** If you've turned on "reduce motion" in your OS, you get the still image instead of the video.

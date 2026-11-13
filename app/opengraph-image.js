@@ -15,13 +15,13 @@ export default async function Image() {
   const [spaceGrotesk, dmSans, poster] = await Promise.all([
     readFile(join(process.cwd(), "app/fonts/SpaceGrotesk-Bold.ttf")),
     readFile(join(process.cwd(), "app/fonts/DMSans-Regular.ttf")),
-    readFile(join(process.cwd(), "public/hero-poster.jpg"), "base64"),
+    readFile(join(process.cwd(), "public/hero-still.jpg"), "base64"),
   ]);
 
   return new ImageResponse(
     (
       <div style={{ display: "flex", width: "100%", height: "100%", background: "#000000" }}>
-        {/* The 3D portrait on the right half, faded into the background on its
+        {/* The hero's last frame on the right half, faded into the background on its
             left edge so there's no hard seam next to the text */}
         <img
           alt=""
