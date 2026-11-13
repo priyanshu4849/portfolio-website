@@ -167,6 +167,17 @@ describe("links and markup", () => {
     for (const img of tags("img")) assert.ok("alt" in img, `${img.src} has no alt attribute`);
   });
 
+  test("dimmed text is still readable (opacity 0.37 or more)", () => {
+    // The About line's words start dimmed and light up as you scroll. On the black page
+    // the text needs at least 37% opacity for a 3:1 contrast ratio, the minimum for large
+    // text. Opacity 0 is fine: that's an entrance animation that hasn't run yet, and
+    // contrast checks skip invisible elements.
+    for (const [, value] of html.matchAll(/style="opacity:([0-9.]+)"/g)) {
+      const opacity = Number(value);
+      if (opacity > 0 && opacity < 1) assert.ok(opacity >= 0.37, `text at opacity ${opacity} is too faint to read`);
+    }
+  });
+
   test("all five sections exist and every nav link points at one", () => {
     for (const id of ["about", "skills", "projects", "community", "contact"]) {
       assert.match(html, new RegExp(`<section[^>]*id="${id}"`), `missing section #${id}`);

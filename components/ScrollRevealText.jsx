@@ -5,8 +5,11 @@ import { motion, useScroll, useTransform } from "motion/react";
 import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 
 // How bright a word is before its turn: dim enough that the lit words stand out,
-// bright enough to still be readable if JavaScript is slow to load.
-const DIM = 0.15;
+// bright enough to stay readable. Readable has a number: on the black page, our
+// off white text needs at least 37% opacity to reach a 3:1 contrast ratio, the
+// minimum for large bold text (WCAG). At 0.15 it was 1.35:1, which Lighthouse flagged,
+// since it checks the page before anyone scrolls. 0.4 gives 3.39:1.
+const DIM = 0.4;
 
 // A line of text where each word lights up, one after another, as the line scrolls up
 // the screen. Scrolling back down dims it again. `as` picks the HTML tag (h2 by default),
