@@ -51,7 +51,7 @@ components/
   Projects.jsx          project cards, built from a data list
   Community.jsx
   Contact.jsx
-  SectionHeading.jsx    shared numbered heading ("01 / About")
+  SectionHeading.jsx    shared heading with the code style label ("priyanshu.about()")
   Nav.jsx
   ScrollProgress.jsx
 public/                 hero video and poster, profile photo, project screenshots, resume

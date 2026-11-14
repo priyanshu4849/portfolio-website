@@ -77,7 +77,6 @@ export default function Community() {
     <section id="community" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          index="04"
           label="Community"
           title="Hackathons and workshops on campus."
           subtitle="What I do when I'm not coding."

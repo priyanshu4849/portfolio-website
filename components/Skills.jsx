@@ -38,7 +38,6 @@ export default function Skills({ github }) {
     <section id="skills" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          index="02"
           label="Skills"
           title="What I work with."
           subtitle="Each group says where I've used it."

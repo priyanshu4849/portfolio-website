@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import ScrollRevealText from "./ScrollRevealText";
+import { SectionLabel } from "./SectionHeading";
 
 const rightNow = [
   { label: "Studying", value: "CS at Galgotias University, Class of 2027" },
@@ -20,12 +21,10 @@ export default function About() {
   return (
     <section id="about" className="border-b border-foreground/10 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl">
-        {/* Same numbered label as every other section (see SectionHeading.jsx). The heading
+        {/* Same label as every other section (see SectionHeading.jsx). The heading
             itself is bigger here and lights up word by word as you scroll, so it's written
             out instead of using SectionHeading. */}
-        <p className="text-xs font-medium uppercase tracking-widest text-accent">
-          01 <span className="text-foreground/30">/</span> About
-        </p>
+        <SectionLabel label="About" />
         <ScrollRevealText
           text="I build web apps and help run the Google developer club at my college."
           className="mt-6 max-w-4xl text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl"

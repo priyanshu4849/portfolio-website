@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-// One heading style for every section: a small numbered peach label, the heading itself,
+// One heading style for every section: a small code style label, the heading itself,
 // and an optional subtitle that sits on the right on wider screens. Keeping it in one
 // component means the sections can't drift apart.
 //
@@ -20,7 +20,25 @@ const fade = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.25 } },
 };
 
-export default function SectionHeading({ index, label, title, subtitle }) {
+// The label carries on from the hero's intro, which types "> priyanshu.init()": every
+// section is another call, like priyanshu.about(). Screen readers get the plain word
+// ("About") instead of hearing "priyanshu dot about left paren right paren".
+// The dimmed parts are at 50% because on black that's about 4.8:1, just over the
+// 4.5:1 that text this small needs.
+export function SectionLabel({ label, className = "" }) {
+  return (
+    <p className={`font-mono text-sm ${className}`}>
+      <span className="sr-only">{label}</span>
+      <span aria-hidden="true">
+        <span className="text-foreground/50">priyanshu.</span>
+        <span className="text-accent">{label.toLowerCase()}</span>
+        <span className="text-foreground/50">()</span>
+      </span>
+    </p>
+  );
+}
+
+export default function SectionHeading({ label, title, subtitle }) {
   return (
     <motion.div
       initial="hidden"
@@ -29,9 +47,9 @@ export default function SectionHeading({ index, label, title, subtitle }) {
       className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8"
     >
       <div>
-        <motion.p variants={fade} className="text-xs font-medium uppercase tracking-widest text-accent">
-          {index} <span className="text-foreground/30">/</span> {label}
-        </motion.p>
+        <motion.div variants={fade}>
+          <SectionLabel label={label} />
+        </motion.div>
         <h2 className="mt-4 max-w-2xl text-4xl leading-[1.05] font-bold sm:text-5xl">
           {/* The bottom padding (cancelled by the negative margin) gives letters like "g"
               and "y" room below the line, so the clipping edge doesn't cut their tails. */}

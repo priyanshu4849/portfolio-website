@@ -25,7 +25,6 @@ export default function Contact() {
     <section id="contact" className="px-6 pt-24 pb-12 lg:pt-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          index="05"
           label="Contact"
           title="Looking for an internship."
           subtitle="I graduate in 2027. If you're hiring interns, email me or message me on LinkedIn."
